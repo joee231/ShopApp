@@ -37,7 +37,6 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
         'password': password,
       },
     ).then((value) {
-      print('✅ Login Success → ${value?.data}');
       loginModel = ShopLoginModel.fromJson(value?.data);
       emit(ShopLoginSuccessState(loginModel));
       token = 'Bearer ${loginModel.data.access_token!}';
@@ -46,7 +45,6 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
           value: token
       );
     }).catchError((error) {
-      print('❌ Login Failed → ${error.toString()}');
       emit(ShopLoginErrorState(error.toString()));
     });
   }

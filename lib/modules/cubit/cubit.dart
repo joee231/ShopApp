@@ -51,16 +51,16 @@ class ShopCubit extends Cubit<ShopStates> {
   void getHomeData() {
     emit(ShopLoadingHomeDataState());
 
-    //print('BASE: ${DioHelper.dio?.options.baseUrl}');
-    //print('ENDPOINT: $HOME');
-    //print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
-    //print('TOKEN: $token');
+    ////print('BASE: ${DioHelper.dio?.options.baseUrl}');
+    ////print('ENDPOINT: $HOME');
+    ////print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
+    ////print('TOKEN: $token');
 
     DioHelper.getData(
       url: HOME,
       token: token,
     ).then((value) {
-      //print('RESPONSE DATA: ${value?.data}');
+      ////print('RESPONSE DATA: ${value?.data}');
 
       // ✅ Check if response was successful
       if (value != null && value.data['status'] == true) {
@@ -75,11 +75,11 @@ class ShopCubit extends Cubit<ShopStates> {
           });
 
 
-          //print(favorites.toString());
+          ////print(favorites.toString());
 
           emit(ShopSuccessHomeDataState());
         } catch (e) {
-          //print('❌ JSON parsing failed: $e');
+          ////print('❌ JSON parsing failed: $e');
           emit(ShopErrorHomeDataState('Failed to parse home data'));
         }
       } else {
@@ -88,9 +88,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }
     }).catchError((error) {
       if (error is DioError) {
-        //print('❌ Status Code: ${error.response?.statusCode}');
-        //print('❌ URI: ${error.requestOptions.uri}');
-        //print('❌ Body: ${error.response?.data}');
+        ////print('❌ Status Code: ${error.response?.statusCode}');
+        ////print('❌ URI: ${error.requestOptions.uri}');
+        ////print('❌ Body: ${error.response?.data}');
       }
       emit(ShopErrorHomeDataState(error.toString()));
     });
@@ -99,16 +99,16 @@ class ShopCubit extends Cubit<ShopStates> {
   CategoriesModel? categoriesModel;
 
   void getCategories() {
-    //print('BASE: ${DioHelper.dio?.options.baseUrl}');
-    //print('ENDPOINT: $HOME');
-    //print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
-    //print('TOKEN: $token');
+    ////print('BASE: ${DioHelper.dio?.options.baseUrl}');
+    ////print('ENDPOINT: $HOME');
+    ////print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
+    ////print('TOKEN: $token');
 
     DioHelper.getData(
       url: GET_CATEGORIES,
       token: token,
     ).then((value) {
-      //print('RESPONSE DATA: ${value?.data}');
+      ////print('RESPONSE DATA: ${value?.data}');
 
       // ✅ Check if response was successful
       if (value != null && value.data['status'] == true) {
@@ -118,7 +118,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
           emit(ShopSuccessCategoriesDataState());
         } catch (e) {
-          //print('❌ JSON parsing failed: $e');
+          ////print('❌ JSON parsing failed: $e');
           emit(ShopErroCategoriesDataState('Failed to parse home data'));
         }
       } else {
@@ -127,9 +127,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }
     }).catchError((error) {
       if (error is DioError) {
-        //print('❌ Status Code: ${error.response?.statusCode}');
-        //print('❌ URI: ${error.requestOptions.uri}');
-        //print('❌ Body: ${error.response?.data}');
+        ////print('❌ Status Code: ${error.response?.statusCode}');
+        ////print('❌ URI: ${error.requestOptions.uri}');
+        ////print('❌ Body: ${error.response?.data}');
       }
       emit(ShopErroCategoriesDataState(error.toString()));
     });
@@ -152,11 +152,11 @@ class ShopCubit extends Cubit<ShopStates> {
     )
         .then((value) {
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value!.data);
-      //print('ChangeFavoritesModel: ${value.data}');
+      ////print('ChangeFavoritesModel: ${value.data}');
 
       if (!changeFavoritesModel!.status) {
         favorites[producId] = !favorites[producId]!;
-        //print('Error: ${changeFavoritesModel!.message}');
+        ////print('Error: ${changeFavoritesModel!.message}');
         emit(ShopErroChangeFavoritesState(changeFavoritesModel!.message));
         return;
       } else {
@@ -178,27 +178,27 @@ class ShopCubit extends Cubit<ShopStates> {
   void getFavorites() {
     emit(ShopLoadingGetFavoritesDataState());
 
-    print('BASE: ${DioHelper.dio?.options.baseUrl}');
-    print('ENDPOINT: $HOME');
-    print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
-    print('TOKEN: $token');
+    //print('BASE: ${DioHelper.dio?.options.baseUrl}');
+    //print('ENDPOINT: $HOME');
+    //print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
+    //print('TOKEN: $token');
 
     DioHelper.getData(
       url: FAVORITES,
       token: token,
     ).then((value) {
-      print('RESPONSE DATA: ${value?.data}');
+      //print('RESPONSE DATA: ${value?.data}');
 
       // ✅ Check if response was successful
       if (value != null && value.data['status'] == true) {
         // ✅ Safely parse the model
         try {
           favoritesModel = FavoritesModel.fromJson(value.data);
-          //printFullText(value.data.toString());
+          ////printFullText(value.data.toString());
 
           emit(ShopSuccessGetFavoritesDataState());
         } catch (e) {
-          //print('❌ JSON parsing failed: $e');
+          ////print('❌ JSON parsing failed: $e');
           emit(ShopErroGetFavoritesDataState('Failed to parse home data'));
         }
       } else {
@@ -207,9 +207,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }
     }).catchError((error) {
       if (error is DioError) {
-        //print('❌ Status Code: ${error.response?.statusCode}');
-        //print('❌ URI: ${error.requestOptions.uri}');
-        //print('❌ Body: ${error.response?.data}');
+        ////print('❌ Status Code: ${error.response?.statusCode}');
+        ////print('❌ URI: ${error.requestOptions.uri}');
+        ////print('❌ Body: ${error.response?.data}');
       }
       emit(ShopErroGetFavoritesDataState(error.toString()));
     });
@@ -220,26 +220,26 @@ class ShopCubit extends Cubit<ShopStates> {
   void getUserData() {
     emit(ShopLoadingGetUserDataState());
 
-    //print('BASE: ${DioHelper.dio?.options.baseUrl}');
-    //print('ENDPOINT: $HOME');
-    //print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
-    //print('TOKEN: $token');
+    ////print('BASE: ${DioHelper.dio?.options.baseUrl}');
+    ////print('ENDPOINT: $HOME');
+    ////print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
+    ////print('TOKEN: $token');
 
     DioHelper.getData(
       url: PROFILE,
       token: token,
     ).then((value) {
-      //print('RESPONSE DATA: ${value?.data}');
+      ////print('RESPONSE DATA: ${value?.data}');
 
       // ✅ Check if response was successful
       if (value != null && value.data['status'] == true) {
         // ✅ Safely parse the model
         try {
           userModel = ShopLoginModel.fromJson(value.data);
-          //printFullText(userModel!.data!.name!);
+          ////printFullText(userModel!.data!.name!);
           emit(ShopSuccessGetUserDataState(userModel));
         } catch (e) {
-          ////print('❌ JSON parsing failed: $e');
+          //////print('❌ JSON parsing failed: $e');
           emit(ShopErroGetUserDataState('Failed to parse home data'));
         }
       } else {
@@ -248,9 +248,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }
     }).catchError((error) {
       if (error is DioError) {
-        //print('❌ Status Code: ${error.response?.statusCode}');
-        //print('❌ URI: ${error.requestOptions.uri}');
-        //print('❌ Body: ${error.response?.data}');
+        ////print('❌ Status Code: ${error.response?.statusCode}');
+        ////print('❌ URI: ${error.requestOptions.uri}');
+        ////print('❌ Body: ${error.response?.data}');
       }
       emit(ShopErroGetUserDataState(error.toString()));
     });
@@ -284,7 +284,7 @@ class ShopCubit extends Cubit<ShopStates> {
                   .isNotEmpty &&
               newToken != token) {
             // Only update if you're sure it's needed, otherwise just log
-            print('ℹ️ Ignoring new token: $newToken');
+            //print('ℹ️ Ignoring new token: $newToken');
             // token = newToken; // ❌ Do not override unless you really need to
           }
 
@@ -297,7 +297,7 @@ class ShopCubit extends Cubit<ShopStates> {
         emit(ShopErroUpdateUserDataState('Update failed: status false'));
       }
     }).catchError((error) {
-      print('❌ Error during update: $error');
+      //print('❌ Error during update: $error');
       emit(ShopErroUpdateUserDataState('Error during update: $error'));
     });
   }
@@ -333,11 +333,11 @@ class ShopCubit extends Cubit<ShopStates> {
     )
         .then((value) {
       changeCartModel = ChangeCartModel.fromJson(value!.data);
-      print('ChangeCartModel: ${value.data}');
+      //print('ChangeCartModel: ${value.data}');
 
       if (!changeCartModel!.status) {
         cart[producId] = !cart[producId]!;
-        print('Error: ${changeCartModel!.message}');
+        //print('Error: ${changeCartModel!.message}');
         emit(ShopErroChangeCartState(changeCartModel!.message));
         return false;
       } else {
@@ -364,28 +364,28 @@ class ShopCubit extends Cubit<ShopStates> {
   void getCart() {
     emit(ShopLoadingGetCartDataState());
 
-    print('BASE: ${DioHelper.dio?.options.baseUrl}');
-    print('ENDPOINT: $HOME');
-    print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
-    print('TOKEN: $token');
+    //print('BASE: ${DioHelper.dio?.options.baseUrl}');
+    //print('ENDPOINT: $HOME');
+    //print('FULL: ${DioHelper.dio?.options.baseUrl}$HOME');
+    //print('TOKEN: $token');
 
 
     DioHelper.getData(
       url: CART,
       token: token,
     ).then((value) {
-      print('RESPONSE DATA: ${value?.data}');
+      //print('RESPONSE DATA: ${value?.data}');
 
       // ✅ Check if response was successful
       if (value!.data['status'] == true) {
         // ✅ Safely parse the model
         try {
           cartModel = CartModel.fromJson(value.data);
-          printFullText(value.data.toString());
+          //printFullText(value.data.toString());
 
           emit(ShopSuccessGetCartDataState());
         } catch (e) {
-          print('❌ JSON parsing failed: $e');
+          //print('❌ JSON parsing failed: $e');
           emit(ShopErroGetCartDataState('Failed to parse home data'));
         }
       } else {
@@ -394,9 +394,9 @@ class ShopCubit extends Cubit<ShopStates> {
       }
     }).catchError((error) {
       if (error is DioError) {
-        print('❌ Status Code: ${error.response?.statusCode}');
-        print('❌ URI: ${error.requestOptions.uri}');
-        print('❌ Body: ${error.response?.data}');
+        //print('❌ Status Code: ${error.response?.statusCode}');
+        //print('❌ URI: ${error.requestOptions.uri}');
+        //print('❌ Body: ${error.response?.data}');
       }
       emit(ShopErroGetCartDataState(error.toString()));
     });
@@ -422,7 +422,7 @@ class ShopCubit extends Cubit<ShopStates> {
         emit(ShopErroUpdateCartQuantityState('Failed to update cart quantity'));
       }
     }).catchError((error) {
-      print('❌ Error during update: $error');
+      //print('❌ Error during update: $error');
       emit(ShopErroUpdateCartQuantityState('Error during update: $error'));
     });
   }
